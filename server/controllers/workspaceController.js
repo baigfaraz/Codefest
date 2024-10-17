@@ -78,7 +78,6 @@ const deleteWorkspace = async (req, res) => {
   }
 };
 
-// get all workspaces by workspaceId where userId is present
 // Get all workspaces by userId
 const getWorkspacesOfUser = async (req, res) => {
   const userId = req.user._id; // Assuming user is authenticated and their id is in req.user
@@ -112,6 +111,17 @@ const getWorkspaceUsers = async (req, res) => {
   }
 };
 
+// get all workspace users of specific workspace
+const getWorkspaceUsersOfSpecificWorkspace = async (req, res) => {
+  const { workspaceId } = req.body;
+  try {
+    const workspaceUsers = await WorkspaceUser.find({ workspaceId });
+    res.status(200).json(workspaceUsers);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export {
   createWorkspace,
   addUsersToWorkspace,
@@ -120,4 +130,5 @@ export {
   deleteWorkspace,
   getWorkspacesOfUser,
   getWorkspaceUsers,
+  getWorkspaceUsersOfSpecificWorkspace,
 };

@@ -20,11 +20,9 @@ const taskSchema = new mongoose.Schema({
         ref: 'User',
         default: null
     },
-    startTime: {
-        type: Date
-    },
-    endTime: {
-        type: Date
+    estimatedTime: {
+        type: Number,
+        default: 0
     },
     taskStatus: {
         type: String,

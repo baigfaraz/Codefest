@@ -8,7 +8,6 @@ import {
   getProjectsByUser,
   getProjectMembers,
 } from "../controllers/projectController.js";
-import getWorkspaceUsers from "../controllers/workspaceController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -21,7 +20,7 @@ router.get("/getallprojectsbyadmin", protect, admin, getAllProjectsByAdmin);
 // get all projects by team lead
 router.get("/getallprojectsbyteamlead", protect, getAllProjectsByTeamLead);
 // assign users to project
-router.post("/assignuserstoproject", protect, assignUsersToProject);
+router.post("/addMembersInProject", protect, assignUsersToProject);
 // get all projects by user
 router.get("/getprojectsbyuser", protect, getProjectsByUser);
 // get all project members

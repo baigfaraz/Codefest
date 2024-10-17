@@ -6,6 +6,8 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import userRoutes from './routes/userRoutes.js';
 import workspaceRoutes from './routes/workspaceRoutes.js'; 
 import projectRoutes from './routes/projectRoutes.js';
+import taskRoutes from './routes/taskRoutes.js';
+import chatRoutes from './routes/chatRoutes.js';
 
 dotenv.config(); 
 
@@ -20,6 +22,8 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 app.use('/api/workspaces', workspaceRoutes); 
 app.use('/api/projects', projectRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/chat', chatRoutes);
 
 // Error handling middleware
 app.use(notFound);

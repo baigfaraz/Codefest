@@ -97,7 +97,7 @@ const assignUsersToProject = async (req, res) => {
     await ProjectMember.insertMany(projectMembers);
 
     res.status(201).json({
-      message: "Users successfully assigned to the project",
+      message: "Users successfully added in the project",
       projectMembers,
     });
   } catch (error) {
