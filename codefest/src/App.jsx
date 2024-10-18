@@ -1,72 +1,35 @@
+import { FluentProvider, webLightTheme } from "@fluentui/react-components";
+import * as React from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import AdminDashboard from "./screens/AdminDashboard";
+import HomePage from "./screens/HomePage";
+import LoginPage from "./screens/LoginPage";
+import ProjectPage from "./screens/ProjectPage";
+import RegisterPage from "./screens/RegisterPage";
+import TaskPage from "./screens/TaskPage";
+import WorkspacePage from "./screens/WorkspacePage";
+import AdminProjectsDashboard from "./screens/AdminProjectsDashboard/";
 
-// import {
-//   Button,
-//   FluentProvider,
-//   makeStyles,
-//   tokens,
-//   webLightTheme
-// } from "@fluentui/react-components";
-// import * as React from "react";
-// import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-
-
-// const useStyles = makeStyles({
-//   button: {
-//     marginTop: "5px",
-//   },
-//   provider: {
-//     border: "1px",
-//     borderRadius: "5px",
-//     padding: "5px",
-//   },
-//   text: {
-//     backgroundColor: tokens.colorBrandBackground2,
-//     color: tokens.colorBrandForeground2,
-//     fontSize: "20px",
-//     border: "1px",
-//     borderRadius: "5px",
-//     padding: "5px",
-//   },
-// });
-
-// function App() {
-//   const styles = useStyles();
-//   return (
-//     <FluentProvider className={styles.provider} theme={webLightTheme}>
-//         <div className={styles.text}>Web Light Theme</div>
-//         <Button className={styles.button}>Web Light Theme</Button>
-//     </FluentProvider>
-//   )
-// }
-
-// export default App
-
-
-// src/App.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import HomePage from './components/HomePage';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
-import ProfilePage from './components/ProfilePage';
-import AdminPage from './components/AdminPage';
-import './App.css';
-
-const App = () => {
+function App() {
   return (
-    <AuthProvider>
+    <FluentProvider theme={webLightTheme}>
       <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/admin" element={<AdminPage />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/admin-projects-dashboard/:workspaceId" element={<AdminProjectsDashboard />}/>
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/home/workspace" element={<WorkspacePage />} />
+            <Route path="/home/workspace/project" element={<ProjectPage />} />
+            <Route path="/home/workspace/project/task" element={<TaskPage />} />
+          </Routes>
+        </AuthProvider>
       </Router>
-    </AuthProvider>
+    </FluentProvider>
   );
-};
+}
 
 export default App;

@@ -18,6 +18,7 @@ const createWorkspace = async (req, res) => {
 };
 
 // Add users to workspace
+
 const addUsersToWorkspace = async (req, res) => {
     const { workspaceId, userIds } = req.body;  // Expecting userIds to be an array of user IDs
   
@@ -59,6 +60,20 @@ const getWorkspaces = async (req, res) => {
   try {
     const workspaces = await Workspace.find();
     res.status(200).json(workspaces);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// get workspace by id
+const getWorkspaceById = async (req, res) => {
+  const { workspaceId } = req.query; // Change from req.body to req.query
+  try {
+    const workspace = await Workspace.findById(workspaceId);
+    if (!workspace) {
+      return res.status(404).json({ error: "Workspace not found" });
+    }
+    res.status(200).json(workspace);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -131,4 +146,5 @@ export {
   getWorkspacesOfUser,
   getWorkspaceUsers,
   getWorkspaceUsersOfSpecificWorkspace,
+  getWorkspaceById,
 };
